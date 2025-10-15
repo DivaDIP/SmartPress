@@ -96,3 +96,4 @@ class NewsService {
 // e = error
 // encoding = data yng susah dibaca ( json = RADT)
 // decoding = data yang mudah untuk dibaca ( dart = DART )
+// fungsi controller = memproses request, menghandling logic, berinteraksi dg model untuk mengambil atau menyimpan data
