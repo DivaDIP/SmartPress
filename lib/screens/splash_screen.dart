@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:metronews_app/routes/app_pages.dart';
 // import 'package:get/get.dart';
 import 'package:metronews_app/utils/app_colors.dart';
 
@@ -44,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen>
 
       // navigate to homescreen after 3 sec
       Future.delayed(Duration(seconds: 3), () {
-        // Get.offAllNamed(Routes.HOME); 
+        Get.offAllNamed(Routes.HOME); 
       });
     }
 
