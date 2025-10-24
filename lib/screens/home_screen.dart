@@ -1,28 +1,32 @@
-// a brand new way for make a screen using get state management
+// A brand new way for make a screen using get state management
+
 import 'package:flutter/material.dart';
+// import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:metronews_app/controllers/news_controller.dart';
+import 'package:metronews_app/routes/app_pages.dart';
 import 'package:metronews_app/utils/app_colors.dart';
 import 'package:metronews_app/widgets/category_chip.dart';
 import 'package:metronews_app/widgets/loading_shimmer.dart';
 import 'package:metronews_app/widgets/news_card.dart';
 
-class HomeScreen extends GetView<NewsController> {
+class HomeScreen extends GetView<NewsController>{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+   return Scaffold(
       appBar: AppBar(
         title: Text('News App'),
         centerTitle: true,
         actions: [
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: () => _showSearchDialog()
+              onPressed: () => showSearchDialog(context),
           )
         ],
       ),
       body: Column(
         children: [
+          // categories
           Container(
             height: 60,
             color: Colors.white,
@@ -32,19 +36,17 @@ class HomeScreen extends GetView<NewsController> {
               itemCount: controller.categories.length,
               itemBuilder: (context, index) {
                 final category = controller.categories[index];
-                // obx = observable dari get x
-                return Obx(() => CategoryChip(
-                  // ?? = untuk set default
-                  label: category.capitalize ?? category,
-                  // == category : menyamakan isinya dengan category
+                return Obx(() => CategoryChip( // obx itu observable
+                  label: category.capitalize ?? category, // ?? -> default value
                   isSelected: controller.selectedCategory == category,
                   onTap: () => controller.selectCategory(category),
                 ));
               },
             ),
           ),
-            // news list
-          Expanded( // gabakal biarin ada runag kosong yang tersisa
+          
+          // news list
+          Expanded( // gabakal biarin ada runag kososng yang tersisa
             child: Obx(() { // obx buat ngasi tau ui kalo ada perubahan
             if (controller.isLoading) {
               return LoadingShimmer();
@@ -58,7 +60,7 @@ class HomeScreen extends GetView<NewsController> {
             }
 
             return RefreshIndicator(
-              onRefresh: controller.refreshNews(),
+              onRefresh: controller.refreshNews,
               child: ListView.builder(
                 padding: EdgeInsets.all(16),
                 itemCount: controller.articles.length,
@@ -67,13 +69,15 @@ class HomeScreen extends GetView<NewsController> {
                   return NewsCard(
                     article: article,
                     onTap: () => Get.toNamed(
-                      // TODO: add route to detail screen
-                      arguments: article // argumen untuk bernavigasi ke halaman lain dengan membawa data 
+                      Routes.NEWS_DETAIL,
+                      // argument berfungsi untuk bernavigasi ke halaman lain dengan membawa data
+                      arguments: article,
                     ),
                   );
                 },
               ),
             );
+
             }) 
           )
         ],
@@ -93,18 +97,18 @@ class HomeScreen extends GetView<NewsController> {
           ),
           SizedBox(height: 16),
           Text(
-            'No news available',
+            'no news available',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
+              color: AppColors.textPrimary
             ),
           ),
           SizedBox(height: 8),
           Text(
-            'Please try again later',
+            'please try again later',
             style: TextStyle(
-              color: AppColors.textSecondary
+              color: AppColors.textSecondary,
             ),
           )
         ],
@@ -148,20 +152,22 @@ class HomeScreen extends GetView<NewsController> {
     );
   }
 
-  void  _showSearchDialog(BuildContext context) {
+
+
+ void showSearchDialog(BuildContext context) {
     final TextEditingController searchController = TextEditingController();
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Search News"),
+        title: Text('Search News'),
         content: TextField(
           controller: searchController,
           decoration: InputDecoration(
             hintText: 'Please type a news..',
-            border: OutlineInputBorder(),
+            border: OutlineInputBorder()
           ),
-          onSubmitted: (value) {
+          onSubmitted: (value){
             if (value.isNotEmpty) {
               controller.searchNews(value);
               Navigator.of(context).pop();
@@ -173,7 +179,6 @@ class HomeScreen extends GetView<NewsController> {
             onPressed: () => Navigator.of(context).pop(),
             child: Text('Cancel'),
           ),
-          // anonimis function = 
           ElevatedButton(
             onPressed: () {
               if (searchController.text.isNotEmpty) {
@@ -187,5 +192,4 @@ class HomeScreen extends GetView<NewsController> {
       ),
     );
   }
-  
 }

@@ -7,3 +7,7 @@ class AppBinding implements Bindings {
     Get.put<NewsController>(NewsController(), permanent: true);
   }
 }
+
+
+// untuk semua controller aplikais
+// binding = supaya controller busa terkendali dg baik

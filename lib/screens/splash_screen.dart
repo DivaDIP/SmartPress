@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:metronews_app/routes/app_pages.dart';
-// import 'package:get/get.dart';
 import 'package:metronews_app/utils/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
