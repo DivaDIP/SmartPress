@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:metronews_app/models/news_articles.dart';
-import 'package:metronews_app/utils/app_colors.dart';
+import 'package:smartpress_app/models/news_articles.dart';
+import 'package:smartpress_app/utils/app_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class NewsCard extends StatelessWidget {
@@ -19,6 +19,7 @@ class NewsCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12)
       ),
+      // inkwell merupakan
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(8),

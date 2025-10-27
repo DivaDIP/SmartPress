@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:metronews_app/bindings/app_binding.dart';
-import 'package:metronews_app/routes/app_pages.dart';
-import 'package:metronews_app/utils/app_colors.dart';
+import 'package:smartpress_app/bindings/app_binding.dart';
+import 'package:smartpress_app/routes/app_pages.dart';
+import 'package:smartpress_app/utils/app_colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,16 +11,16 @@ void main() async {
   // load environment variables first before the app
   await dotenv.load(fileName: '.env');
 
-  runApp(MetroNewsApp());
+  runApp(SmartPressApp());
 }
 
-class MetroNewsApp extends StatelessWidget {
-  const MetroNewsApp({super.key});
+class SmartPressApp extends StatelessWidget {
+  const SmartPressApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'MetroNewsApp',
+      title: 'SmartPressApp',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         primaryColor: AppColors.primary,

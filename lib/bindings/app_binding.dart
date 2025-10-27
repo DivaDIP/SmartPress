@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:metronews_app/controllers/news_controller.dart';
+import 'package:smartpress_app/controllers/news_controller.dart';
 
 class AppBinding implements Bindings {
   @override

@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:metronews_app/controllers/news_controller.dart';
-import 'package:metronews_app/routes/app_pages.dart';
-import 'package:metronews_app/utils/app_colors.dart';
-import 'package:metronews_app/widgets/category_chip.dart';
-import 'package:metronews_app/widgets/loading_shimmer.dart';
-import 'package:metronews_app/widgets/news_card.dart';
+import 'package:smartpress_app/controllers/news_controller.dart';
+import 'package:smartpress_app/routes/app_pages.dart';
+import 'package:smartpress_app/utils/app_colors.dart';
+import 'package:smartpress_app/widgets/category_chip.dart';
+import 'package:smartpress_app/widgets/loading_shimmer.dart';
+import 'package:smartpress_app/widgets/news_card.dart';
 
 class HomeScreen extends GetView<NewsController>{
   @override

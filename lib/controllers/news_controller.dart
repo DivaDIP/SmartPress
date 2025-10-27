@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:metronews_app/models/news_articles.dart';
-import 'package:metronews_app/services/news_services.dart';
-import 'package:metronews_app/utils/constants.dart';
+import 'package:smartpress_app/models/news_articles.dart';
+import 'package:smartpress_app/services/news_services.dart';
+import 'package:smartpress_app/utils/constants.dart';
 
 class NewsController extends GetxController {
   final NewsService _newsServices = NewsService();

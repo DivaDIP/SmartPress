@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:metronews_app/bindings/home_binding.dart';
-import 'package:metronews_app/screens/home_screen.dart';
-import 'package:metronews_app/screens/news_detail_screen.dart';
-import 'package:metronews_app/screens/splash_screen.dart';
+import 'package:smartpress_app/bindings/home_binding.dart';
+import 'package:smartpress_app/screens/home_screen.dart';
+import 'package:smartpress_app/screens/news_detail_screen.dart';
+import 'package:smartpress_app/screens/splash_screen.dart';
 
 part 'app_routes.dart';
 

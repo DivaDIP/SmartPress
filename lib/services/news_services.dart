@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:metronews_app/models/news_response.dart';
-import 'package:metronews_app/utils/constants.dart';
-import 'package:http/http.dart' as http; // mendefinisikan sebuah package atau library menjadi sebuah variabel secara langsung.
+import 'package:http/http.dart' as http;
+import 'package:smartpress_app/models/news_response.dart';
+import 'package:smartpress_app/utils/constants.dart'; // mendefinisikan sebuah package atau library menjadi sebuah variabel secara langsung.
 
 class NewsService {
   static const String _baseUrl = Constants.baseUrl;

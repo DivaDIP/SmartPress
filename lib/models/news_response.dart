@@ -1,4 +1,4 @@
-import 'package:metronews_app/models/news_articles.dart';
+import 'package:smartpress_app/models/news_articles.dart';
 
 class NewsResponse {
   final String status;

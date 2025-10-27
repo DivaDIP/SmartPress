@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:metronews_app/utils/app_colors.dart';
+import 'package:smartpress_app/utils/app_colors.dart';
 
 class CategoryChip extends StatelessWidget {
   final String label;
