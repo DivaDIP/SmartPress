@@ -7,3 +7,6 @@ class HomeBinding implements Bindings {
     Get.lazyPut<NewsController>(() => NewsController());
   }
 }
+
+
+// untuk binding home_screen

@@ -1,7 +1,6 @@
 // A brand new way for make a screen using get state management
 
 import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:metronews_app/controllers/news_controller.dart';
 import 'package:metronews_app/routes/app_pages.dart';
@@ -15,7 +14,12 @@ class HomeScreen extends GetView<NewsController>{
   Widget build(BuildContext context) {
    return Scaffold(
       appBar: AppBar(
-        title: Text('News App'),
+        title: Text(
+          'SmartPress',
+          style: TextStyle(
+            fontWeight: FontWeight.bold
+          ),
+          ),
         centerTitle: true,
         actions: [
           IconButton(
@@ -86,6 +90,7 @@ class HomeScreen extends GetView<NewsController>{
   }
 
   Widget _buildEmptyWidget() {
+    // No news Page
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -117,6 +122,7 @@ class HomeScreen extends GetView<NewsController>{
   }
 
   Widget _buildErrorWidget() {
+    // No connection page
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -157,6 +163,7 @@ class HomeScreen extends GetView<NewsController>{
  void showSearchDialog(BuildContext context) {
     final TextEditingController searchController = TextEditingController();
 
+  // search bar
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -174,6 +181,7 @@ class HomeScreen extends GetView<NewsController>{
             }
           },
         ),
+        // search button
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
