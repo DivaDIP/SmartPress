@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smartpress_app/routes/app_pages.dart';
-import 'package:smartpress_app/utils/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -10,46 +10,38 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> 
-  with SingleTickerProviderStateMixin{
-    late AnimationController _animationController;
-    late Animation<double> _fadeAnimation;
-    late Animation<double> _scaleAnimation;
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _fadeAnimation;
+  late Animation<double> _scaleAnimation;
 
+  @override
+  void initState() {
+    super.initState();
 
-    @override
-    void initState() {
-      super.initState();
-      _animationController = AnimationController(
-        duration: Duration(seconds: 2),
-        vsync: this
-      );
+    _animationController = AnimationController(
+      duration: Duration(seconds: 2),
+      vsync: this,
+    );
 
-      _fadeAnimation = Tween<double>(
-        begin: 0.0,
-        end: 1.0
-      ).animate(CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeInOut
-      ));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
 
-      _scaleAnimation = Tween<double>(
-        begin: 0.5,
-        end: 1.0
-      ).animate(CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.elasticInOut
-      ));
+    _scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.elasticOut),
+    );
 
-      _animationController.forward();
+    _animationController.forward();
 
-      // navigate to homescreen after 3 sec
-      Future.delayed(Duration(seconds: 3), () {
-        Get.offAllNamed(Routes.HOME); 
-      });
-    }
+    // Pindah ke HomeScreen setelah 5 detik
+    Future.delayed(const Duration(seconds: 5), () {
+      Get.offAllNamed(Routes.HOME);
+    });
+  }
 
-   @override
+  @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
@@ -58,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: Colors.white,
       body: Center(
         child: AnimatedBuilder(
           animation: _animationController,
@@ -70,45 +62,39 @@ class _SplashScreenState extends State<SplashScreen>
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 120,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.2),
-                          blurRadius: 20,
-                          offset: Offset(0, 10)
-                        )]
-                      ),
-                      child: Icon(
-                        Icons.newspaper,
-                        size: 60,
-                        color: AppColors.primary,
+                    // Lottie animation
+                    SizedBox(
+                      height: 250,
+                      width: 250,
+                      child: Lottie.asset(
+                        'asset/lottie/newsletter.json',  
+                        fit: BoxFit.contain, 
+                        repeat: true,
+                        animate: true,
                       ),
                     ),
+                    SizedBox(height: 20),
                     Text(
-                      'News App',
+                      'SmartPress',
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        letterSpacing: 1.5
+                        color: Color(0xFF477023),
+                        letterSpacing: 1.5,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 8),
                     Text(
-                      'Stay Updtaed with Lates News',
+                      'Stay Updated with Latest News',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.white.withValues(alpha: 0.8)
+                        color: Color(0xFF477023).withValues(alpha: 0.8),
                       ),
                     ),
                     SizedBox(height: 50),
                     CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                    )
+                    ),
                   ],
                 ),
               ),

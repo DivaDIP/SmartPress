@@ -14,17 +14,20 @@ class HomeScreen extends GetView<NewsController>{
   Widget build(BuildContext context) {
    return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'SmartPress',
-          style: TextStyle(
-            fontWeight: FontWeight.bold
+        title: Padding(
+          padding: EdgeInsets.all(8),
+          child: Image.asset(
+            'asset/image/logo-news.png',
+            height: 40,
           ),
-          ),
-        centerTitle: true,
+        ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-              onPressed: () => showSearchDialog(context),
+          Padding(
+            padding: EdgeInsets.all(8),
+            child: IconButton(
+              icon: Icon(Icons.search),
+                onPressed: () => showSearchDialog(context),
+            ),
           )
         ],
       ),
@@ -33,7 +36,7 @@ class HomeScreen extends GetView<NewsController>{
           // categories
           Container(
             height: 60,
-            color: Colors.white,
+            color: Color(0xFFEAE0D2),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
