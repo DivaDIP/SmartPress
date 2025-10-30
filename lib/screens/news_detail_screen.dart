@@ -15,6 +15,56 @@ class NewsDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // --- Tambahkan bottomNavigationBar di sini ---
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: Row(
+            children: [
+              // Tombol Read full article (pindah ke kiri)
+              Expanded(
+                flex: 2,
+                child: ElevatedButton(
+                  onPressed: _openInBrowser,
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: AppColors.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Text(
+                    'Read full article',
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ),
+              ),
+              SizedBox(width: 12),
+              // Tombol Like
+              Container(
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: IconButton(
+                  icon: Icon(Icons.favorite_border, color: AppColors.primary),
+                  onPressed: () {
+                    Get.snackbar(
+                      'Liked!',
+                      'You liked this article 💙',
+                      snackPosition: SnackPosition.BOTTOM,
+                      duration: Duration(seconds: 2),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -23,51 +73,44 @@ class NewsDetailScreen extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               background: article.urlToImage != null
                   ? CachedNetworkImage(
-                    imageUrl: article.urlToImage!,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Container(
-                      color: AppColors.divider,
-                      child: Center(
-                        // untuk load kalau gambarnya belum muncul
-                        child: CircularProgressIndicator(),
+                      imageUrl: article.urlToImage!,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Container(
+                        color: AppColors.divider,
+                        child: Center(child: CircularProgressIndicator()),
                       ),
-                    ),
-                    errorWidget: (context, url, error) => Container(
+                      errorWidget: (context, url, error) => Container(
+                        color: AppColors.divider,
+                        child: Icon(
+                          Icons.image_not_supported,
+                          size: 50,
+                          color: AppColors.textHint,
+                        ),
+                      ),
+                    )
+                  : Container(
                       color: AppColors.divider,
                       child: Icon(
-                        Icons.image_not_supported,
+                        Icons.newspaper,
                         size: 50,
                         color: AppColors.textHint,
                       ),
                     ),
-                  )
-                  // statememt yg akan dijalankan ketika server tidak memiliki gambar atau 
-                  // => image == null
-                  : Container(
-                    color: AppColors.divider,
-                    child: Icon(
-                      Icons.newspaper,
-                      size: 50,
-                      color: AppColors.textHint,
-                    ),
-                  )
             ),
             actions: [
               IconButton(
-                icon: Icon(
-                  Icons.share
-                ),
+                icon: Icon(Icons.share),
                 onPressed: () => _shareArticle(),
               ),
               PopupMenuButton(
                 onSelected: (value) {
                   switch (value) {
                     case 'copy_link':
-                    _copyLink();
+                      _copyLink();
                       break;
                     case 'open_browser':
                       _openInBrowser();
-                    break;
+                      break;
                   }
                 },
                 itemBuilder: (context) => [
@@ -77,7 +120,7 @@ class NewsDetailScreen extends StatelessWidget {
                       children: [
                         Icon(Icons.copy),
                         SizedBox(width: 8),
-                        Text('Copy Link')
+                        Text('Copy Link'),
                       ],
                     ),
                   ),
@@ -86,13 +129,13 @@ class NewsDetailScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(Icons.open_in_browser),
-                        SizedBox(height: 8,),
-                        Text('Open in browser')
+                        SizedBox(width: 8),
+                        Text('Open in browser'),
                       ],
                     ),
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
           SliverToBoxAdapter(
@@ -101,24 +144,24 @@ class NewsDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // source & date
                   Row(
                     children: [
                       if (article.source != null) ...[
                         Container(
                           padding: EdgeInsets.symmetric(
                             horizontal: 8,
-                            vertical: 4
+                            vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.primary.withValues(alpha: 0.1)
+                            color: AppColors.primary.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
                             article.source!.name!,
                             style: TextStyle(
                               color: AppColors.primary,
                               fontSize: 12,
-                              fontWeight: FontWeight.bold
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -129,14 +172,13 @@ class NewsDetailScreen extends StatelessWidget {
                           timeago.format(DateTime.parse(article.publishedAt!)),
                           style: TextStyle(
                             color: AppColors.textSecondary,
-                            fontSize: 12
+                            fontSize: 12,
                           ),
                         ),
-                      ]
+                      ],
                     ],
                   ),
                   SizedBox(height: 16),
-                  // title
                   if (article.title != null) ...[
                     Text(
                       article.title!,
@@ -144,24 +186,22 @@ class NewsDetailScreen extends StatelessWidget {
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: AppColors.textPrimary,
-                        height: 1.3
-                      )
+                        height: 1.3,
+                      ),
                     ),
                     SizedBox(height: 16),
                   ],
-                  // desc
                   if (article.description != null) ...[
                     Text(
                       article.description!,
                       style: TextStyle(
                         color: AppColors.textSecondary,
                         fontSize: 16,
-                        height: 1.5
+                        height: 1.5,
                       ),
-                    )
+                    ),
                   ],
                   SizedBox(height: 20),
-                  // content
                   if (article.content != null) ...[
                     Text(
                       'Content',
@@ -177,37 +217,15 @@ class NewsDetailScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         color: AppColors.textPrimary,
-                        height: 1.6
+                        height: 1.6,
                       ),
                     ),
                     SizedBox(height: 24),
                   ],
-                  // button read full article
-                  if (article.url != null) ...[
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: _openInBrowser,
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)
-                          ),
-                        ),
-                        child: Text(
-                          'Read full article',
-                          style: TextStyle(
-                            fontSize: 16
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                  SizedBox(height: 32)
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -216,9 +234,8 @@ class NewsDetailScreen extends StatelessWidget {
   void _shareArticle() {
     if (article.url != null) {
       Share.share(
-        // string inter
         '${article.title ?? 'Check out this news'}\n\n${article.url}',
-        subject: article.title
+        subject: article.title,
       );
     }
   }
@@ -229,22 +246,20 @@ class NewsDetailScreen extends StatelessWidget {
       'Success',
       'Link Copied to clipboard',
       snackPosition: SnackPosition.BOTTOM,
-      duration: Duration(seconds: 2)
+      duration: Duration(seconds: 2),
     );
   }
 
   void _openInBrowser() async {
     if (article.url != null) {
       final Uri url = Uri.parse(article.url!);
-      // proses menunggu apakah URL valid dan bisa dibuka oleh browser?
       if (await canLaunchUrl(url)) {
-        // proses menunggu ketika url sudah valid dan sedang diproses oleh browser samapai datanya muncul
         await launchUrl(url, mode: LaunchMode.externalApplication);
       } else {
         Get.snackbar(
-          'error',
+          'Error',
           'Could not open the link',
-          snackPosition: SnackPosition.BOTTOM
+          snackPosition: SnackPosition.BOTTOM,
         );
       }
     }

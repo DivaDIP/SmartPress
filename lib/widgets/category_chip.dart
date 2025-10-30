@@ -11,7 +11,7 @@ class CategoryChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 8),
+      padding: EdgeInsets.all(8),
       child: FilterChip(
         label: Text(label),
         selected: isSelected,

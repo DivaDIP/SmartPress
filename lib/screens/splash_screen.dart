@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smartpress_app/routes/app_pages.dart';
+import 'package:smartpress_app/utils/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -36,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen>
     _animationController.forward();
 
     // Pindah ke HomeScreen setelah 5 detik
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Get.offAllNamed(Routes.HOME);
     });
   }
@@ -85,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Stay Updated with Latest News',
+                      'Bringing the world’s headlines to your hands',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color(0xFF477023).withValues(alpha: 0.8),
@@ -93,7 +94,7 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                     SizedBox(height: 50),
                     CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.textSecondary),
                     ),
                   ],
                 ),
