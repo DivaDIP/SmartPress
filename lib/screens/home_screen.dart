@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartpress_app/controllers/news_controller.dart';
+import 'package:smartpress_app/home/components/empty_state.dart';
+import 'package:smartpress_app/home/components/error_state.dart';
 import 'package:smartpress_app/routes/app_pages.dart';
 import 'package:smartpress_app/widgets/category_chip.dart';
 import 'package:smartpress_app/widgets/loading_shimmer.dart';
@@ -81,8 +83,8 @@ class HomeScreen extends GetView<NewsController> {
           Expanded(
             child: Obx(() {
               if (controller.isLoading) return LoadingShimmer();
-              if (controller.error.isNotEmpty) return Center(child: Text('Something went wrong'));
-              if (controller.articles.isEmpty) return Center(child: Text('No news found'));
+              if (controller.articles.isEmpty) return EmptyStateWidget();
+              if (controller.error.isNotEmpty) return ErrorStateWidget(onRetry: controller.refreshNews);
 
               return RefreshIndicator(
                 onRefresh: controller.refreshNews,
